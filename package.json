@@ -1,0 +1,73 @@
+{
+  "name": "external-config-app",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "/frontend",
+  "author": {
+    "name": "Valentin Jeandot",
+    "email": "valentin.jeandot@cirly.com",
+    "url": "https://cirly.com"
+  },
+  "dependencies": {
+    "autoprefixer": "^10.4.20",
+    "axios": "^1.7.7",
+    "cross-var": "^1.1.0",
+    "env-cmd": "^10.1.0",
+    "i18next": "^23.14.0",
+    "i18next-browser-languagedetector": "^8.0.0",
+    "npm-run-all": "^4.1.5",
+    "postcss": "^8.4.44",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-i18next": "^15.0.1",
+    "react-router-dom": "^6.26.1",
+    "react-scripts": "5.0.1",
+    "typescript": "^4.9.5",
+    "web-vitals": "^2.1.4"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@types/jest": "^27.5.2",
+    "@types/node": "^16.18.107",
+    "@types/react": "^18.3.5",
+    "@types/react-dom": "^18.3.0",
+    "chokidar-cli": "^3.0.0",
+    "prettier": "^3.3.3",
+    "tailwindcss": "^3.4.10"
+  },
+  "scripts": {
+    "build:docker": "cross-var docker build -t $npm_package_name:$npm_package_version .",
+    "publish:docker": "cross-var docker push $npm_package_name:$npm_package_version",
+    "start": "env-cmd -f .env.dev npm-run-all build:tailwind --parallel watch:tailwind dev",
+    "dev": "react-scripts start",
+    "build:dev": "env-cmd -f .env.dev npm-run-all prebuild build",
+    "build:prod": "env-cmd -f .env npm-run-all prebuild build",
+    "build": "react-scripts build",
+    "prebuild": "env-cmd -f .env run-s build:tailwind",
+    "test": "react-scripts test --watchAll=false --passWithNoTests",
+    "eject": "react-scripts eject",
+    "build:tailwind": "tailwind -o src/tailwind.output.css --minify",
+    "watch:tailwind": "chokidar 'src/**/*.css' 'src/**/*.scss' --ignore src/tailwind.output.css -c 'npm run build:tailwind'",
+    "format": "prettier . --write"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

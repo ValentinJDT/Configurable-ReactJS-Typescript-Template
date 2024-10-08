@@ -1,0 +1,8 @@
+{
+    "value": "Default value",
+    "a": {
+        "name": "A",
+        "index": 1,
+        "nexts": [ "b", "c" ]
+    }
+}
