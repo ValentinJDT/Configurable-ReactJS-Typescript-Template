@@ -1,5 +1,7 @@
 import React from 'react';
 
+const CONFIG_FILES = ['config'];
+
 interface NestedObject {
   [key: string]: NestedObject | any;
 }
@@ -36,12 +38,9 @@ class ParseConfig implements Config {
 const EMPTY_CONFIG = new ParseConfig({});
 
 const loadConfig = async (onLoad: (data: Config) => void) => {
-
-  const files = ['config'];
-
   const parsedConfig: NestedObject = {};
 
-  for (const file of files) {
+  for (const file of CONFIG_FILES) {
     await fetch(`/frontend/config/${file}.json`).then(async (response) => {
       parsedConfig[file] = await response
         .json()

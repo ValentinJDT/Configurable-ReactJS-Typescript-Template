@@ -16,6 +16,8 @@ Edit `/usr/share/nginx/html/<frontend>` in Dockerfile.<br />
 Edit/add default configuration files in `/public/default`.
 If the edited configuration(s) doesn't/don't exist, it falls back to the default configuration(s).
 
+If you want to add configuration file, add json file in `/public/default`, and add filename in `CONFIG_FILES` array in `/src/contexts/ConfigContext.ts`. If anyone wants to automate this step, do a pull request !
+
 Use `useConfig` to acces to configuration.
 
 ## Build prod
