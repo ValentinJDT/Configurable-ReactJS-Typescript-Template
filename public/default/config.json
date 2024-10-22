@@ -1,8 +1,29 @@
 {
-    "value": "Default value",
-    "a": {
-        "name": "A",
-        "index": 1,
-        "nexts": [ "b", "c" ]
+  "value": "Default value",
+  "a": {
+    "name": "A",
+    "index": 1,
+    "nexts": ["b", "c"]
+  },
+  "tables": {
+    "main": {
+      "headers": [
+        
+        {
+          "id": "id",
+          "component": "Identifiant",
+          "alignCenter": false,
+          "sortable": true,
+          "default": "UNSORTED"
+        },
+        {
+          "id": "name",
+          "component": "Name",
+          "alignCenter": false,
+          "sortable": true,
+          "default": "UNSORTED"
+        }
+      ]
     }
+  }
 }
