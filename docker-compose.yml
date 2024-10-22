@@ -6,6 +6,6 @@ services:
     ports:
       - "80:80"
     # Copy the configuration files from the default location to the volume if they don't exist
-    command: sh -c "cp -u /usr/share/nginx/html/frontend/default/* /usr/share/nginx/html/frontend/config/ && nginx -g 'daemon off;'"
+    command: sh -c "cp -u /usr/share/nginx/html/default/* /usr/share/nginx/html/config/ && nginx -g 'daemon off;'"
     volumes:
-      - ${DOCKER_DATA}/Tests/config:/usr/share/nginx/html/frontend/config/
+      - ${DOCKER_DATA}/Tests/config:/usr/share/nginx/html/config/
