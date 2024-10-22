@@ -8,19 +8,20 @@ interface NestedObject {
 
 interface Config {
   get<T>(path: string): T | string;
+  object: NestedObject;
 }
 
 class ParseConfig implements Config {
-  private parsedConfig: NestedObject;
+  object: NestedObject;
 
   constructor(parsedConfig: Object) {
-    this.parsedConfig = parsedConfig;
+    this.object = parsedConfig;
   }
 
 
  get<T>(path: string): T | string {
     const parts = path.split('.');
-    let current: any = this.parsedConfig;
+    let current: any = this.object;
   
     for (const part of parts) {
       if (current && typeof current[part] !== 'undefined') {
@@ -41,11 +42,11 @@ const loadConfig = async (onLoad: (data: Config) => void) => {
   const parsedConfig: NestedObject = {};
 
   for (const file of CONFIG_FILES) {
-    await fetch(`/frontend/config/${file}.json`).then(async (response) => {
+    await fetch(`/config/${file}.json`).then(async (response) => {
       parsedConfig[file] = await response
         .json()
         .catch(
-          async () => await fetch(`/frontend/default/${file}.json`).then(async (response) => await response.json())
+          async () => await fetch(`/default/${file}.json`).then(async (response) => await response.json())
         );
     });
   }

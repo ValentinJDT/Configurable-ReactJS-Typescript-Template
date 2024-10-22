@@ -11,7 +11,7 @@ const Home: FC = () => {
 
   useEffect(() => {
     console.log(config);
-  }, [config])
+  }, [config]);
 
   return (
     <header className="App-header">
