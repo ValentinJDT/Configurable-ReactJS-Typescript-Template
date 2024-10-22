@@ -2,17 +2,19 @@
   "name": "external-config-app",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/frontend",
+  "homepage": "/",
   "author": {
     "name": "Valentin Jeandot",
     "email": "valentin.jeandot@cirly.com",
     "url": "https://cirly.com"
   },
   "dependencies": {
+    "@uidotdev/usehooks": "^2.4.1",
     "autoprefixer": "^10.4.20",
     "axios": "^1.7.7",
     "cross-var": "^1.1.0",
     "env-cmd": "^10.1.0",
+    "flowbite-react": "^0.10.2",
     "i18next": "^23.14.0",
     "i18next-browser-languagedetector": "^8.0.0",
     "npm-run-all": "^4.1.5",
@@ -20,6 +22,7 @@
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-i18next": "^15.0.1",
+    "react-icons": "^5.3.0",
     "react-router-dom": "^6.26.1",
     "react-scripts": "5.0.1",
     "typescript": "^4.9.5",
