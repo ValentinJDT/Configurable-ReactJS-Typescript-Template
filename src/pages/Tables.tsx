@@ -1,13 +1,15 @@
-import { CustomFlowbiteTheme, Flowbite, Table } from 'flowbite-react';
+import { Checkbox, CustomFlowbiteTheme, Dropdown, Flowbite, Label, Select, Table } from 'flowbite-react';
 import { useEffect, useState } from 'react';
 import { useConfig } from '../contexts/ConfigContext';
 import CTable, { CTableHeader } from '../components/tables/CTable';
 import { table } from 'console';
+import DropdownCheckboxItems, { DropdownCheckboxValues } from '../components/dropdowns/CCheckboxDropdown';
+import { useLocalConfig } from '../hooks/useLocalConfig';
 
 interface TableExternalConfig {
   headers: ({
-    // Object key to get the value from the data, if not defined, the id will be used.
-    object_key?: string | undefined; 
+    object_key?: string | undefined;
+    showing_default?: boolean | undefined;
   } & CTableHeader)[];
 }
 
@@ -27,6 +29,8 @@ const Tables = () => {
     },
   ]);
 
+  const [values, setValues] = useLocalConfig<DropdownCheckboxValues>('tables', {});
+
   const config = useConfig();
 
   useEffect(() => {
@@ -34,24 +38,40 @@ const Tables = () => {
 
     if (tableConfig == undefined || tableConfig.headers == undefined) return;
     setTableExternalConfig(tableConfig);
+    setValues(
+      tableConfig.headers.reduce(
+        (acc, header) => {
+          if (acc[header.id] == undefined) acc[header.id] = header.showing_default ?? true;
+          return acc;
+        },
+        (values ?? {}) as DropdownCheckboxValues
+      )
+    );
   }, [config]);
+
+  const filteredHeaders = tableExternalConfig.headers.filter((header) => values[header.id]);
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <div>
-        <h1>Tables</h1>
+        <h1 className="m-11">POC : Table configurable v1</h1>
 
-        <CTable
-          id="test"
-          headers={tableExternalConfig.headers}
-          data={data.map((item, index) => {
-            const entries = Object.entries(item);
-            return tableExternalConfig.headers.map((header) => {
-              return entries.find(([key, value]) => header.id == key || header.object_key === key)?.[1];
-            })
-          })}
-        />
+        <div className="container mx-auto px-8">
+          <Dropdown dismissOnClick={false} size="sm" label="Colonnes" color="light">
+            <DropdownCheckboxItems values={values} onChange={(values) => setValues(values)} />
+          </Dropdown>
 
+          <CTable
+            id="test"
+            headers={filteredHeaders}
+            data={data.map((item, index) => {
+              const entries = Object.entries(item);
+              return filteredHeaders.map(
+                (header) => entries.find(([key, value]) => header.id == key || header.object_key === key)?.[1]
+              );
+            })}
+          />
+        </div>
       </div>
     </Flowbite>
   );
