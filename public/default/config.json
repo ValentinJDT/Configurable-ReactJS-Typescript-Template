@@ -8,13 +8,13 @@
   "tables": {
     "main": {
       "headers": [
-        
         {
           "id": "id",
           "component": "Identifiant",
           "alignCenter": false,
           "sortable": true,
-          "default": "UNSORTED"
+          "default": "UNSORTED",
+          "showing_default": false
         },
         {
           "id": "name",
