@@ -76,8 +76,6 @@ const CTable: FC<TableProps> = ({ id = undefined, headers, data, onSortColumns, 
     <Table className="overflow-auto">
       <Table.Head>
         {headers.map((header, index) => {
-
-          console.log(header)
           if (!sort[header.id] && header.default) {
             setSort({
               ...sort,
