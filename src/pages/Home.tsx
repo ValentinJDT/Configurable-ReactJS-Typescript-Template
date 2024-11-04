@@ -10,10 +10,12 @@ const Home: FC = () => {
 
   return (
     <header className="App-header">
-      <h1 className='mt-5'>{tHome('config')}</h1> 
-      <p>{config.get<string>("config.value")}</p>
-      <p>{config.get<string>("config.a.name")} : {config.get<number>("config.a.index")}</p>
-      <p>{config.get<string[]>("config.a.nexts").length }</p>
+      <h1 className="mt-5">{tHome('config')}</h1>
+      <p>{config.get<string>('config.value')}</p>
+      <p>
+        {config.get<string>('config.a.name')} : {config.get<number>('config.a.index')}
+      </p>
+      <p>{config.get<string[]>('config.a.nexts').length}</p>
     </header>
   );
 };

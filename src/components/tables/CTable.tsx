@@ -104,7 +104,9 @@ const CTable: FC<TableProps> = ({ id = undefined, headers, data, onSortColumns, 
               <span
                 className={
                   'flex flex-row items-center space-x-1 ' +
-                  (!!header.sortable ? 'cursor-pointer select-none ' : '' + (!!header.alignCenter ? 'justify-center' : ''))
+                  (!!header.sortable
+                    ? 'cursor-pointer select-none '
+                    : '' + (!!header.alignCenter ? 'justify-center' : ''))
                 }
               >
                 {!!header.sortable && getSortIcon(sort[header.id])}
@@ -127,9 +129,7 @@ const CTable: FC<TableProps> = ({ id = undefined, headers, data, onSortColumns, 
                   />
                 );
               } else {
-
-                if(headers[columnIndex] == undefined)
-                  return <Table.Cell key={columnIndex} children={column} />;
+                if (headers[columnIndex] == undefined) return <Table.Cell key={columnIndex} children={column} />;
 
                 const alignCenter = headers[columnIndex].alignCenter ? 'flex flex-row justify-center' : '';
 

@@ -14,15 +14,14 @@ const DropdownCheckboxItems: FC<DropdownCheckboxItemsProps> = ({ values, onChang
   const [_values, setValues] = useState<{ [key: string]: boolean }>(values);
 
   useEffect(() => {
-    if(_values == values) return;
+    if (_values == values) return;
     onChange && onChange(_values);
   }, [_values]);
 
   useEffect(() => {
-    if(_values == values) return;
+    if (_values == values) return;
     setValues(values);
-  }, [values])
-
+  }, [values]);
 
   return (
     <>
@@ -32,15 +31,8 @@ const DropdownCheckboxItems: FC<DropdownCheckboxItemsProps> = ({ values, onChang
           className="flex space-x-3"
           onClick={() => setValues((prev) => ({ ...prev, [key]: !value }))}
         >
-          <Checkbox
-            checked={value}
-            readOnly
-          />
-          <Label
-            className="cursor-pointer"
-          >
-            {key}
-          </Label>
+          <Checkbox checked={value} readOnly />
+          <Label className="cursor-pointer">{key}</Label>
         </Dropdown.Item>
       ))}
     </>

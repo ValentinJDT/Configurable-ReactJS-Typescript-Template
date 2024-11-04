@@ -1,10 +1,10 @@
-name: "external-config"
+name: 'external-config'
 
 services:
   external:
     image: external-config-app:0.1.0
     ports:
-      - "80:80"
+      - '80:80'
     # Copy the configuration files from the default location to the volume if they don't exist
     command: sh -c "cp -u /usr/share/nginx/html/default/* /usr/share/nginx/html/config/ && nginx -g 'daemon off;'"
     volumes:
