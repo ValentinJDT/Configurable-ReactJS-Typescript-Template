@@ -54,7 +54,7 @@ const Tables = () => {
   return (
     <Flowbite theme={{ theme: customTheme }}>
       <div>
-        <h1 className="m-11">POC : Table configurable v1</h1>
+        <h1 className="m-11">Table configurable</h1>
 
         <div className="container mx-auto px-8">
           <Dropdown dismissOnClick={false} size="sm" label="Colonnes" color="light">
