@@ -3,11 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "homepage": "/",
-  "author": {
-    "name": "Valentin Jeandot",
-    "email": "valentin.jeandot@cirly.com",
-    "url": "https://cirly.com"
-  },
   "dependencies": {
     "@uidotdev/usehooks": "^2.4.1",
     "autoprefixer": "^10.4.20",
