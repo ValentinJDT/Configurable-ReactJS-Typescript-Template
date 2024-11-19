@@ -1,3 +1,7 @@
 {
-  "config": "From configuration :"
+  "config": "From configuration :",
+  "table": {
+    "title": "Configurable table",
+    "columns": "Columns"
+  }
 }

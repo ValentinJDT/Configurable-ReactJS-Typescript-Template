@@ -1,10 +1,11 @@
 import { Checkbox, CustomFlowbiteTheme, Dropdown, Flowbite, Label, Select, Table } from 'flowbite-react';
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState } from 'react';
 import { useConfig } from '../contexts/ConfigContext';
 import CTable, { CTableHeader } from '../components/tables/CTable';
 import { table } from 'console';
 import DropdownCheckboxItems, { DropdownCheckboxValues } from '../components/dropdowns/CCheckboxDropdown';
 import { useLocalConfig } from '../hooks/useLocalConfig';
+import { useTranslation } from 'react-i18next';
 
 interface TableExternalConfig {
   headers: ({
@@ -14,14 +15,16 @@ interface TableExternalConfig {
 }
 
 const Tables = () => {
+  const [tHome] = useTranslation('home');
+
   const [tableExternalConfig, setTableExternalConfig] = useState<TableExternalConfig>({
     headers: [],
   });
 
-  const [data, setData] = useState<{ id: number; name: string }[]>([
+  const [data, setData] = useState<{ id: number; name: ReactNode }[]>([
     {
       id: 1,
-      name: 'John Doe',
+      name: <div>John Doe</div>,
     },
     {
       id: 2,
@@ -49,7 +52,15 @@ const Tables = () => {
     );
   }, [config]);
 
-  const filteredHeaders = tableExternalConfig.headers.filter((header) => values[header.id]);
+  const filteredHeaders = tableExternalConfig.headers
+    .filter((header) => values[header.id])
+    .map((header) => {
+      if (typeof header.component == 'string') {
+        return { ...header, element: tHome(header.component) };
+      }
+
+      return header;
+    });
 
   return (
     <Flowbite theme={{ theme: customTheme }}>
@@ -57,7 +68,7 @@ const Tables = () => {
         <h1 className="m-11">Table configurable</h1>
 
         <div className="container mx-auto px-8">
-          <Dropdown dismissOnClick={false} size="sm" label="Colonnes" color="light">
+          <Dropdown dismissOnClick={false} size="sm" label={tHome('table.columns')} color="light">
             <DropdownCheckboxItems values={values} onChange={(values) => setValues(values)} />
           </Dropdown>
 
